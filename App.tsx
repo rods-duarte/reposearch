@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { ThemeProvider } from 'styled-components';
+import { useFonts } from 'expo-font';
+import {
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from '@expo-google-fonts/roboto';
 
-export default function App() {
+import Home from './src/screens/Home';
+import UsersList from './src/screens/UsersList';
+import { theme } from './src/global/styles/theme';
+
+const Stack = createNativeStackNavigator();
+
+export default function App(): React.JSX.Element | null {
+  const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Users" component={UsersList} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
