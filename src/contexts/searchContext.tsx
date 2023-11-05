@@ -3,8 +3,6 @@ import useFetch from '../hooks/useFetch';
 import { type SearchUsers } from '../types/searchUsers';
 
 interface PropsSearchContext {
-  // users: SearchUsers;
-  // setUsers: React.Dispatch<React.SetStateAction<SearchUsers>>;
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   result: SearchUsers | undefined;
@@ -15,8 +13,6 @@ interface PropsSearchContextProvider {
 }
 
 const DEFAULT_VALUE = {
-  // users: [],
-  // setUsers: () => {},
   query: '',
   setQuery: () => {},
   result: [],
@@ -26,14 +22,13 @@ export const SearchContext = createContext<PropsSearchContext>(DEFAULT_VALUE);
 
 export default function SearchContextProvider({
   children,
-}: PropsSearchContextProvider): React.JSX.Element {
-  // const [users, setUsers] = useState([]);
+}: Readonly<PropsSearchContextProvider>): React.JSX.Element {
   const [query, setQuery] = useState('');
 
-  const { data } = useFetch<SearchUsers>(`/search/users?q=${query}`);
+  const { data } = useFetch<{ items: SearchUsers }>(`/search/users?q=${query}`);
 
   return (
-    <SearchContext.Provider value={{ query, setQuery, result: data }}>
+    <SearchContext.Provider value={{ query, setQuery, result: data?.items }}>
       {children}
     </SearchContext.Provider>
   );
