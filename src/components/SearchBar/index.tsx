@@ -16,21 +16,19 @@ export default function SearchBar(): React.JSX.Element {
   };
 
   return (
-    <>
-      <S.SearchBar>
-        <S.Input
-          placeholder="Search for user..."
-          value={textField}
-          onChangeText={onChangeTextField}
+    <S.SearchBar>
+      <S.Input
+        placeholder="Search for user..."
+        value={textField}
+        onChangeText={onChangeTextField}
+      />
+      <S.Button onPress={handlePress} $active={buttonEnabled}>
+        <S.EntypoIcon
+          name="magnifying-glass"
+          size={32}
+          $active={buttonEnabled}
         />
-        <S.Button onPress={handlePress} $active={buttonEnabled}>
-          <S.EntypoIcon
-            name="magnifying-glass"
-            size={32}
-            $active={buttonEnabled}
-          />
-        </S.Button>
-      </S.SearchBar>
-    </>
+      </S.Button>
+    </S.SearchBar>
   );
 }
