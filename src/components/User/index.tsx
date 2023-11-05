@@ -1,6 +1,9 @@
 import * as S from './style';
 import { type IUser, type UserSummary } from '../../types/searchUsers';
 import useFetch from '../../hooks/useFetch';
+import { useContext } from 'react';
+import { UsersContext } from '../../contexts/usersContext';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   search: UserSummary;
@@ -8,9 +11,18 @@ interface Props {
 
 export default function User({ search }: Props): React.JSX.Element {
   const { data } = useFetch<IUser>(`/users/${search.login}`);
+  const { openUser } = useContext(UsersContext);
+  const navigation = useNavigation();
+
+  const handlePress = (): void => {
+    if (data !== undefined) {
+      openUser(data);
+      navigation.navigate('Repos');
+    }
+  };
 
   return (
-    <S.User>
+    <S.User onPress={handlePress}>
       <S.Left>
         <S.Avatar source={{ uri: search.avatar_url }} />
         <S.Info>
@@ -19,7 +31,7 @@ export default function User({ search }: Props): React.JSX.Element {
         </S.Info>
       </S.Left>
       <S.Right>
-        <S.IoniconsIcons name="location-outline" size={14} color="black" />
+        <S.IoniconsIcons name="location-outline" size={14} />
         <S.Location>{data?.location}</S.Location>
       </S.Right>
     </S.User>

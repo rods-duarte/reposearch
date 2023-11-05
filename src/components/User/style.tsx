@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { Ionicons } from '@expo/vector-icons';
 
-export const User = styled.View`
+export const User = styled.Pressable`
   width: 100%;
   height: 60px;
   border-radius: 10px;
