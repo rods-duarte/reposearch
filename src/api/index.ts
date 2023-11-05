@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_URL, API_TOKEN } from '@env';
 
 export const baseAPI = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_API_URL,
+  baseURL: API_URL,
   headers: {
-    Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_TOKEN}`,
+    Authorization: `Bearer ${API_TOKEN}`,
   },
 });
