@@ -12,7 +12,9 @@ export const Home = styled.View`
   padding: 0 20px;
 `;
 
-export const HistoryButton = styled.View`
+export const Main = styled.View``;
+
+export const Top = styled.View`
   position: absolute;
   top: 30px;
   left: 20px;
@@ -21,4 +23,5 @@ export const HistoryButton = styled.View`
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.text.primary};
   font-size: 40px;
+  font-family: ${({ theme }) => theme.fonts.bold};
 `;
