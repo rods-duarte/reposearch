@@ -11,6 +11,8 @@ import {
 import Home from './src/screens/Home';
 import UsersList from './src/screens/UsersList';
 import { theme } from './src/global/styles/theme';
+import { StatusBar } from 'expo-status-bar';
+import GlobalContext from './src/contexts';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,12 +29,15 @@ export default function App(): React.JSX.Element | null {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Users" component={UsersList} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <GlobalContext>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="UsersList" component={UsersList} />
+          </Stack.Navigator>
+          <StatusBar backgroundColor="#fff" style="light" />
+        </NavigationContainer>
+      </GlobalContext>
     </ThemeProvider>
   );
 }
