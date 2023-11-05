@@ -9,7 +9,7 @@ import {
 } from '@expo-google-fonts/roboto';
 
 import Home from './src/screens/Home';
-import UsersList from './src/screens/UsersList';
+import Results from './src/screens/Results';
 import { theme } from './src/global/styles/theme';
 import { StatusBar } from 'expo-status-bar';
 import GlobalContext from './src/contexts';
@@ -33,7 +33,7 @@ export default function App(): React.JSX.Element | null {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="UsersList" component={UsersList} />
+            <Stack.Screen name="Results" component={Results} />
           </Stack.Navigator>
           <StatusBar backgroundColor="#fff" style="light" />
         </NavigationContainer>

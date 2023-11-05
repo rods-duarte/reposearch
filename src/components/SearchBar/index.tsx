@@ -12,7 +12,7 @@ export default function SearchBar(): React.JSX.Element {
 
   const handlePress = (): void => {
     setQuery(textField);
-    navigation.navigate('UsersList');
+    navigation.navigate('Results');
   };
 
   return (
