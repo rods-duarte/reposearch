@@ -4,7 +4,6 @@ import { theme } from '../../global/styles/theme';
 
 export const SearchBar = styled.View`
   width: 100%;
-  height: 60px;
 
   display: flex;
   flex-direction: row;
@@ -18,12 +17,11 @@ export const Input = styled.TextInput.attrs({
   border-radius: 10px 0 0 10px;
   padding-left: 10px;
   color: ${({ theme }) => theme.colors.text.primary};
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const Button = styled.Pressable<{ $active?: boolean }>`
   flex: 1;
-  width: 60px;
-  height: 60px;
 
   border: 1px solid ${({ theme }) => theme.colors.secondary};
   border-radius: 0 10px 10px 0;
