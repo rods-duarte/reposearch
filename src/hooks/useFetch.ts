@@ -17,7 +17,7 @@ export default function useFetch<T>(url: string): FetchResult<T> {
       setLoading(true);
       try {
         const res = await baseAPI.get(url);
-        setData(res.data.data);
+        setData(res.data.items);
       } catch (error) {
         setError(true);
         console.log(error);
