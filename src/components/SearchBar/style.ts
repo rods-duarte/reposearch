@@ -29,17 +29,13 @@ export const Button = styled.Pressable<{ $active?: boolean }>`
   border-radius: 0 10px 10px 0;
   background-color: ${({ theme, $active }) =>
     $active ?? false ? theme.colors.tertiary : theme.colors.primary};
-  width: fit-content;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: all 0.5 ease;
 `;
 
 export const EntypoIcon = styled(Entypo)<{ $active?: boolean }>`
   color: ${({ theme, $active }) =>
     $active ?? false ? theme.colors.icon.primary : theme.colors.icon.secondary};
-  transition: all 0.5 ease;
 `;
