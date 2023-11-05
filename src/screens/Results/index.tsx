@@ -6,7 +6,19 @@ import HistoryButton from '../../components/HistoryButton';
 import SearchBar from '../../components/SearchBar';
 
 export default function Results(): React.JSX.Element {
-  const { result } = useContext(SearchContext);
+  const { result, total } = useContext(SearchContext);
+
+  const listBuilder = (): React.JSX.Element | null => {
+    if (result !== undefined) {
+      return (
+        <>
+          <S.Title>{`Found ${total} results`}</S.Title>
+          <List type="users" />
+        </>
+      );
+    }
+    return <S.Loading />;
+  };
 
   return (
     <S.Results>
@@ -16,8 +28,7 @@ export default function Results(): React.JSX.Element {
           <SearchBar />
         </S.Wrapper>
       </S.Top>
-      <S.Title>{`Found ${result?.length} results`}</S.Title>
-      <List />
+      {listBuilder()}
     </S.Results>
   );
 }

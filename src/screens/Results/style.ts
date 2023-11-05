@@ -26,6 +26,11 @@ export const Wrapper = styled.View`
 
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.text.primary};
-  font-size: 40px;
+  font-size: 30px;
   font-family: ${({ theme }) => theme.fonts.bold};
+`;
+
+export const Loading = styled.View`
+  flex: 1;
+  width: 100%;
 `;
