@@ -14,8 +14,8 @@ interface Props {
 
 export default function List({ type }: Props): React.JSX.Element {
   const scroll = useRef<ScrollView>(null);
-  const { result, setPage: setUsersPage } = useContext(SearchContext);
-  const { repos, setPage: setReposPage } = useContext(UsersContext);
+  const { result, setPage: setUsersPage, total } = useContext(SearchContext);
+  const { repos, setPage: setReposPage, user } = useContext(UsersContext);
 
   const renderContent = (): React.JSX.Element[] | null => {
     if (type === 'users' && result != null) {
@@ -28,6 +28,20 @@ export default function List({ type }: Props): React.JSX.Element {
     return null;
   };
 
+  const renderNextPageButton = (): React.JSX.Element | null => {
+    const searchUsersPageLimit = type === 'users' && total === result?.length;
+    const reposPageLimit =
+      type === 'repos' && user?.public_repos === repos?.length;
+
+    if (searchUsersPageLimit || reposPageLimit) return null;
+
+    return (
+      <S.NextPage onPress={handlePress}>
+        <S.AntDesignIcons name="arrowdown" size={24} />
+      </S.NextPage>
+    );
+  };
+
   const handlePress = (): void => {
     scroll.current?.scrollToEnd();
     if (type === 'users') setUsersPage((prevPage) => prevPage + 1);
@@ -37,9 +51,7 @@ export default function List({ type }: Props): React.JSX.Element {
   return (
     <S.Wrapper>
       <S.List ref={scroll}>{renderContent()}</S.List>
-      <S.NextPage onPress={handlePress}>
-        <S.AntDesignIcons name="arrowdown" size={24} />
-      </S.NextPage>
+      {renderNextPageButton()}
     </S.Wrapper>
   );
 }
