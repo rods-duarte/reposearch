@@ -11,7 +11,6 @@ interface PropsUsersContext {
   openUser: (p: IUser) => void;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
-  clearData: () => void;
 }
 
 interface PropsUsersContextProvider {
@@ -26,7 +25,6 @@ const DEFAULT_VALUE = {
   openUser: () => {},
   page: 1,
   setPage: () => {},
-  clearData: () => {},
 };
 
 export const UsersContext = createContext<PropsUsersContext>(DEFAULT_VALUE);

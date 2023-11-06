@@ -9,7 +9,6 @@ interface PropsSearchContext {
   setPage: React.Dispatch<React.SetStateAction<number>>;
   result: SearchUsers | undefined;
   total: number | undefined;
-  clearData: () => void;
 }
 
 interface PropsSearchContextProvider {
@@ -23,7 +22,6 @@ const DEFAULT_VALUE = {
   setPage: () => {},
   result: [],
   total: 0,
-  clearData: () => {},
 };
 
 export const SearchContext = createContext<PropsSearchContext>(DEFAULT_VALUE);
@@ -38,10 +36,6 @@ export default function SearchContextProvider({
   const { data } = useFetch<{ items: SearchUsers; total_count: number }>(
     `/search/users?q=${query}&page=${page}`,
   );
-
-  const clearData = (): void => {
-    setAllResults([]);
-  };
 
   useEffect(() => {
     if (data?.items != null) {
@@ -62,7 +56,6 @@ export default function SearchContextProvider({
         total: data?.total_count,
         page,
         setPage,
-        clearData,
       }}
     >
       {children}
