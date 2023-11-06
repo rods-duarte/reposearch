@@ -14,6 +14,7 @@ import { theme } from './src/global/styles/theme';
 import { StatusBar } from 'expo-status-bar';
 import GlobalContext from './src/contexts';
 import Repos from './src/screens/Repos';
+import History from './src/screens/History';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ export default function App(): React.JSX.Element | null {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Results" component={Results} />
             <Stack.Screen name="Repos" component={Repos} />
+            <Stack.Screen name="History" component={History} />
           </Stack.Navigator>
           <StatusBar backgroundColor="#fff" style="light" />
         </NavigationContainer>

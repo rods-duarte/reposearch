@@ -9,17 +9,26 @@ import { UsersContext } from '../../contexts/usersContext';
 import * as S from './style';
 
 interface Props {
-  type: 'users' | 'repos';
+  type: 'users' | 'repos' | 'history';
 }
 
 export default function List({ type }: Props): React.JSX.Element {
   const scroll = useRef<ScrollView>(null);
   const { result, setPage: setUsersPage, total } = useContext(SearchContext);
-  const { repos, setPage: setReposPage, user } = useContext(UsersContext);
+  const {
+    repos,
+    setPage: setReposPage,
+    user,
+    history,
+  } = useContext(UsersContext);
 
   const renderContent = (): React.JSX.Element[] | null => {
     if (type === 'users' && result != null) {
       return result.map((element) => (
+        <User search={element} key={element.id} />
+      ));
+    } else if (type === 'history') {
+      return history.map((element) => (
         <User search={element} key={element.id} />
       ));
     } else if (type === 'repos' && repos !== null) {
@@ -33,7 +42,8 @@ export default function List({ type }: Props): React.JSX.Element {
     const reposPageLimit =
       type === 'repos' && user?.public_repos === repos?.length;
 
-    if (searchUsersPageLimit || reposPageLimit) return null;
+    if (searchUsersPageLimit || reposPageLimit || type === 'history')
+      return null;
 
     return (
       <S.NextPage onPress={handlePress}>

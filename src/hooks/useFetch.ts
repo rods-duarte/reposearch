@@ -7,10 +7,17 @@ interface FetchResult<T> {
   error: boolean;
 }
 
-export default function useFetch<T>(url: string): FetchResult<T> {
+export default function useFetch<T>(
+  url: string,
+  abort = false,
+): FetchResult<T> {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  if (abort) {
+    return { data: undefined, loading, error };
+  }
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {

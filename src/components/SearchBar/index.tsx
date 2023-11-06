@@ -2,16 +2,20 @@ import React, { useContext, useState } from 'react';
 import * as S from './style';
 import { SearchContext } from '../../contexts/searchContext';
 import { useNavigation } from '@react-navigation/native';
+import { UsersContext } from '../../contexts/usersContext';
 
 export default function SearchBar(): React.JSX.Element {
-  const [textField, onChangeTextField] = useState<string>('');
+  const [textField, setTextField] = useState<string>('');
   const buttonEnabled = textField.length > 0;
   const navigation = useNavigation();
 
   const { setQuery } = useContext(SearchContext);
+  const { setPage } = useContext(UsersContext);
 
   const handlePress = (): void => {
+    setPage(1);
     setQuery(textField);
+    setTextField('');
     navigation.navigate('Results');
   };
 
@@ -20,7 +24,7 @@ export default function SearchBar(): React.JSX.Element {
       <S.Input
         placeholder="Search for user..."
         value={textField}
-        onChangeText={onChangeTextField}
+        onChangeText={setTextField}
       />
       <S.Button onPress={handlePress} $active={buttonEnabled}>
         <S.EntypoIcon
