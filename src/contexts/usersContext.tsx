@@ -35,13 +35,22 @@ export default function UsersContextProvider({
   const [user, setUser] = useState<IUser>();
   const [page, setPage] = useState<number>(1);
   const [allRepos, setAllRepos] = useState<Repos>([]);
-  const history: IUser[] = [];
+  const [history, setHistory] = useState<IUser[]>([]);
 
   const { data } = useFetch<Repos>(`/users/${user?.login}/repos?page=${page}`);
 
+  const updateHistory = (user: IUser): void => {
+    const filteredHist = history.filter((item) => item.id !== user.id);
+    filteredHist.unshift(user);
+    if (filteredHist.length > 10) {
+      filteredHist.pop();
+    }
+    setHistory(filteredHist);
+  };
+
   const openUser = (user: IUser): void => {
     setUser(user);
-    history.push(user);
+    updateHistory(user);
   };
 
   useEffect(() => {
@@ -51,6 +60,7 @@ export default function UsersContextProvider({
   }, [data]);
 
   useEffect(() => {
+    setPage(1);
     setAllRepos([]);
   }, [user]);
 
