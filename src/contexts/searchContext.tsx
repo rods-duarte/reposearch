@@ -44,6 +44,7 @@ export default function SearchContextProvider({
   }, [data]);
 
   useEffect(() => {
+    setPage(1);
     setAllResults([]);
   }, [query]);
 
