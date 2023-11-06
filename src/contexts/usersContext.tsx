@@ -46,15 +46,15 @@ export default function UsersContextProvider({
     history.push(user);
   };
 
-  const clearData = (): void => {
-    setAllRepos([]);
-  };
-
   useEffect(() => {
     if (data != null) {
       setAllRepos([...allRepos, ...data]);
     }
   }, [data]);
+
+  useEffect(() => {
+    setAllRepos([]);
+  }, [user]);
 
   return (
     <UsersContext.Provider
@@ -65,7 +65,6 @@ export default function UsersContextProvider({
         openUser,
         page,
         setPage,
-        clearData,
       }}
     >
       {children}

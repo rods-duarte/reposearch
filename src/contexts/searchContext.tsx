@@ -49,6 +49,10 @@ export default function SearchContextProvider({
     }
   }, [data]);
 
+  useEffect(() => {
+    setAllResults([]);
+  }, [query]);
+
   return (
     <SearchContext.Provider
       value={{

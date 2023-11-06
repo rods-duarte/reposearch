@@ -8,10 +8,9 @@ export default function SearchBar(): React.JSX.Element {
   const buttonEnabled = textField.length > 0;
   const navigation = useNavigation();
 
-  const { setQuery, clearData } = useContext(SearchContext);
+  const { setQuery } = useContext(SearchContext);
 
   const handlePress = (): void => {
-    clearData();
     setQuery(textField);
     navigation.navigate('Results');
   };
