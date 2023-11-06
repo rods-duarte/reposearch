@@ -9,7 +9,7 @@ export default function Results(): React.JSX.Element {
   const { result, total } = useContext(SearchContext);
 
   const listBuilder = (): React.JSX.Element | null => {
-    if (result !== undefined) {
+    if (result?.length !== 0) {
       return (
         <>
           <S.Title>{`Found ${total} results`}</S.Title>
